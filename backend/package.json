@@ -1,0 +1,14 @@
+{
+  "name": "launchloop-backend",
+  "version": "1.0.0",
+  "description": "FastAPI orchestration engine for LAUNCHLOOP",
+  "main": "main.py",
+  "scripts": {
+    "start": "python main.py",
+    "dev": "python main.py",
+    "test": "pytest"
+  },
+  "keywords": ["fastapi", "ai", "devops"],
+  "author": "",
+  "license": "ISC"
+}
