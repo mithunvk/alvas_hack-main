@@ -15,7 +15,7 @@ class WebhookPayload(BaseModel):
     """Manual webhook trigger payload for testing."""
     event_type: str = "workflow_run"
     status: str = "failure"
-    repo: str = "monk-mh/alvas_hack"
+    repo: str = "mithunvk/alvas_hack-main"
     branch: str = "main"
     commit_sha: str = ""
     commit_message: str = ""

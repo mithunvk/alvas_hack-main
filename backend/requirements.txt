@@ -1,8 +1,8 @@
-fastapi==0.111.0
-uvicorn==0.30.1
-python-dotenv==1.0.1
-google-generativeai==0.7.2
-PyGithub==2.3.0
-httpx==0.27.0
-pydantic==2.7.4
-pytest==8.2.2
+fastapi
+uvicorn
+python-dotenv
+google-generativeai
+PyGithub
+httpx
+pydantic>=2.10.0
+pytest

@@ -48,6 +48,12 @@ export const deployStaging = (branch = 'main', commitSha = null) =>
 export const deployProduction = (branch = 'main', approved = false, approvedBy = '') =>
   api.post('/deploy/prod', { branch, approved, approved_by: approvedBy }).then(r => r.data);
 
+export const getConfig = () =>
+  api.get('/config').then(r => r.data);
+
+export const getCurrentBranch = () =>
+  api.get('/git/branch').then(r => r.data);
+
 export const getDeployStatus = () =>
   api.get('/deploy/status').then(r => r.data);
 

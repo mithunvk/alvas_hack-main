@@ -6,6 +6,7 @@ Manages deployment orchestration for staging and production environments.
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
+import os
 from services.event_store import add_event
 from services.github_service import trigger_workflow
 
@@ -42,7 +43,7 @@ async def deploy_staging(payload: DeployPayload):
     event = add_event(
         event_type="deployment",
         status="running" if result.get("success") else "failure",
-        repo=f"monk-mh/alvas_hack",
+        repo=os.getenv("GITHUB_REPO", "mithunvk/alvas_hack-main"),
         branch=payload.branch,
         commit_sha=payload.commit_sha or "",
         commit_message=f"Staging deployment triggered for {payload.branch}",
@@ -83,7 +84,7 @@ async def deploy_production(payload: ProdDeployPayload):
     event = add_event(
         event_type="deployment",
         status="running" if result.get("success") else "failure",
-        repo=f"monk-mh/alvas_hack",
+        repo=os.getenv("GITHUB_REPO", "mithunvk/alvas_hack-main"),
         branch=payload.branch,
         commit_sha=payload.commit_sha or "",
         commit_message=f"Production deployment approved by {payload.approved_by or 'unknown'}",

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import StatCard from '../components/StatCard';
 import StatusBadge from '../components/StatusBadge';
 import EventRow from '../components/EventRow';
+import RippleGrid from '../components/RippleGrid';
 import { getStats, getEvents } from '../api/client';
 
 // Demo data fallback
@@ -23,7 +24,7 @@ const demoStats = {
 const demoEvents = [
   {
     id: 'evt_001', timestamp: '2026-05-08T10:15:30Z', type: 'workflow_run',
-    status: 'failure', repo: 'monk-mh/alvas_hack', branch: 'feature/auth-module',
+    status: 'failure', repo: 'mithunvk/alvas_hack-main', branch: 'feature/auth-module',
     commit_sha: 'a3f7c2e', commit_message: 'Add user authentication module',
     error_summary: "ModuleNotFoundError: No module named 'bcrypt'",
     diagnosis: { issue_type: 'missing_dependency', file_to_change: 'requirements.txt', change: 'bcrypt==4.1.3', risk: 'low' },
@@ -31,7 +32,7 @@ const demoEvents = [
   },
   {
     id: 'evt_002', timestamp: '2026-05-08T11:22:00Z', type: 'workflow_run',
-    status: 'failure', repo: 'monk-mh/alvas_hack', branch: 'feature/api-endpoints',
+    status: 'failure', repo: 'mithunvk/alvas_hack-main', branch: 'feature/api-endpoints',
     commit_sha: 'b8d1f4a', commit_message: 'Update API endpoint handlers',
     error_summary: 'SyntaxError: unexpected EOF in routes/api.py line 47',
     diagnosis: { issue_type: 'syntax_error', file_to_change: 'routes/api.py', change: 'Add missing parenthesis', risk: 'low' },
@@ -39,17 +40,17 @@ const demoEvents = [
   },
   {
     id: 'evt_003', timestamp: '2026-05-08T12:05:45Z', type: 'workflow_run',
-    status: 'success', repo: 'monk-mh/alvas_hack', branch: 'main',
+    status: 'success', repo: 'mithunvk/alvas_hack-main', branch: 'main',
     commit_sha: 'c9e2b5d', commit_message: 'Merge PR #42: Fix missing bcrypt dependency',
   },
   {
     id: 'evt_004', timestamp: '2026-05-08T12:30:00Z', type: 'deployment',
-    status: 'success', repo: 'monk-mh/alvas_hack', branch: 'main',
+    status: 'success', repo: 'mithunvk/alvas_hack-main', branch: 'main',
     commit_sha: 'c9e2b5d', commit_message: 'Deploy to staging after successful CI',
   },
   {
     id: 'evt_006', timestamp: '2026-05-08T13:00:00Z', type: 'workflow_run',
-    status: 'running', repo: 'monk-mh/alvas_hack', branch: 'feature/caching-layer',
+    status: 'running', repo: 'mithunvk/alvas_hack-main', branch: 'feature/caching-layer',
     commit_sha: 'e5g9b2d', commit_message: 'Implement Redis caching layer',
   },
 ];
@@ -82,7 +83,22 @@ export default function Dashboard() {
   const recentEvents = events.slice(0, 5);
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in relative">
+      {/* RippleGrid Background */}
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
+        <RippleGrid
+          enableRainbow={false}
+          gridColor="#00f0ff"
+          rippleIntensity={0.04}
+          gridSize={12}
+          gridThickness={18}
+          mouseInteraction={true}
+          mouseInteractionRadius={1.2}
+          opacity={0.15}
+          glowIntensity={0.08}
+        />
+      </div>
+
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
