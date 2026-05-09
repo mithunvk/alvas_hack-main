@@ -6,7 +6,7 @@ import { getEvents, triggerAgent, applyFix } from '../api/client';
 const demoEvents = [
   {
     id: 'evt_001', timestamp: '2026-05-08T10:15:30Z', type: 'workflow_run',
-    status: 'failure', repo: 'monk-mh/alvas_hack', branch: 'feature/auth-module',
+    status: 'failure', repo: 'mithunvk/alvas_hack-main', branch: 'feature/auth-module',
     commit_sha: 'a3f7c2e', commit_message: 'Add user authentication module',
     log_url: '#', error_summary: "ModuleNotFoundError: No module named 'bcrypt'",
     diagnosis: { issue_type: 'missing_dependency', file_to_change: 'requirements.txt', change: 'bcrypt==4.1.3', risk: 'low', explanation: "bcrypt not in requirements.txt." },
@@ -14,7 +14,7 @@ const demoEvents = [
   },
   {
     id: 'evt_002', timestamp: '2026-05-08T11:22:00Z', type: 'workflow_run',
-    status: 'failure', repo: 'monk-mh/alvas_hack', branch: 'feature/api-endpoints',
+    status: 'failure', repo: 'mithunvk/alvas_hack-main', branch: 'feature/api-endpoints',
     commit_sha: 'b8d1f4a', commit_message: 'Update API endpoint handlers',
     log_url: '#', error_summary: 'SyntaxError: unexpected EOF in routes/api.py line 47',
     diagnosis: { issue_type: 'syntax_error', file_to_change: 'routes/api.py', change: 'Add missing parenthesis', risk: 'low', explanation: 'Missing closing parenthesis.' },
@@ -22,19 +22,19 @@ const demoEvents = [
   },
   {
     id: 'evt_003', timestamp: '2026-05-08T12:05:45Z', type: 'workflow_run',
-    status: 'success', repo: 'monk-mh/alvas_hack', branch: 'main',
+    status: 'success', repo: 'mithunvk/alvas_hack-main', branch: 'main',
     commit_sha: 'c9e2b5d', commit_message: 'Merge PR #42: Fix missing bcrypt dependency',
   },
   {
     id: 'evt_005', timestamp: '2026-05-08T12:45:10Z', type: 'workflow_run',
-    status: 'failure', repo: 'monk-mh/alvas_hack', branch: 'feature/database-migration',
+    status: 'failure', repo: 'mithunvk/alvas_hack-main', branch: 'feature/database-migration',
     commit_sha: 'd4f8a1c', commit_message: 'Add database migration scripts',
     error_summary: "FAILED tests/test_db.py - AssertionError: Table 'users' schema mismatch",
     diagnosis: { issue_type: 'test_failure', file_to_change: 'migrations/002_add_users.py', change: 'Update VARCHAR(50) to VARCHAR(255)', risk: 'medium', explanation: 'Schema mismatch.' },
   },
   {
     id: 'evt_006', timestamp: '2026-05-08T13:00:00Z', type: 'workflow_run',
-    status: 'running', repo: 'monk-mh/alvas_hack', branch: 'feature/caching-layer',
+    status: 'running', repo: 'mithunvk/alvas_hack-main', branch: 'feature/caching-layer',
     commit_sha: 'e5g9b2d', commit_message: 'Implement Redis caching layer',
   },
 ];

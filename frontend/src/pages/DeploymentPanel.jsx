@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Rocket, Server, Shield, CheckCircle2, Clock, AlertTriangle, Loader2, Lock } from 'lucide-react';
 import StatusBadge from '../components/StatusBadge';
-import { deployStaging, deployProduction, getDeployStatus } from '../api/client';
+import { deployStaging, deployProduction, getDeployStatus, getCurrentBranch } from '../api/client';
 
 const demoHistory = [
   { id: 1, env: 'staging', status: 'success', branch: 'main', timestamp: '2026-05-08T12:30:00Z', commit: 'c9e2b5d', deployer: 'LaunchLoop Bot' },
@@ -23,8 +23,9 @@ export default function DeploymentPanel() {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const data = await getDeployStatus();
+        const [data, git] = await Promise.all([getDeployStatus(), getCurrentBranch()]);
         if (data.staging) setDeployStatus(data);
+        if (git.branch) setBranch(git.branch);
       } catch (err) { /* demo */ }
     };
     fetch();

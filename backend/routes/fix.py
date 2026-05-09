@@ -44,7 +44,7 @@ async def apply_fix(payload: ApplyFixPayload):
 
     # Create a fix branch
     fix_branch = f"launchloop/fix-{payload.event_id}"
-    branch_result = create_fix_branch(fix_branch, base_branch="main")
+    branch_result = create_fix_branch(fix_branch, base_branch=branch)
 
     if not branch_result.get("success"):
         return {

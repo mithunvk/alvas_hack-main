@@ -5,6 +5,7 @@ FastAPI Backend Entry Point
 
 import os
 import sys
+import subprocess
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
@@ -79,6 +80,26 @@ async def health_check():
         "github_configured": bool(os.getenv("GITHUB_TOKEN")),
         "gemini_configured": bool(os.getenv("GEMINI_API_KEY")),
     }
+
+
+@app.get("/config")
+async def get_config():
+    """Return public configuration."""
+    return {
+        "github_repo": os.getenv("GITHUB_REPO", "mithunvk/alvas_hack-main"),
+        "github_configured": bool(os.getenv("GITHUB_TOKEN")),
+        "gemini_configured": bool(os.getenv("GEMINI_API_KEY")),
+    }
+
+
+@app.get("/git/branch")
+async def get_git_branch():
+    """Get current local git branch."""
+    try:
+        branch = subprocess.check_output(["git", "branch", "--show-current"]).decode().strip()
+        return {"branch": branch or "main"}
+    except Exception:
+        return {"branch": "main"}
 
 
 # ── Run Server ────────────────────────────────────────────────────────
